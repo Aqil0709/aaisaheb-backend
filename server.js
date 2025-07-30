@@ -17,9 +17,10 @@ const PORT = process.env.PORT || 5001;
 
 // --- CORS Configuration for Production and Local Development ---
 // For production, Render will inject process.env.FRONTEND_URL with your Hostinger domain.
-// For local development, it will fall back to 'http://aaisahebvastram.com'.
+// For local development, it will fall back to 'https://aaisahebvastram.com'.
 const corsOptions = {
-    origin: process.env.FRONTEND_URL || 'http://aaisahebvastram.com', // Dynamic origin for production, your Hostinger URL for dev fallback
+    // CORRECTED: Use HTTPS for the fallback origin as your Hostinger site is likely served over HTTPS.
+    origin: process.env.FRONTEND_URL || 'https://aaisahebvastram.com', 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true // Important if you're sending cookies or authorization headers
