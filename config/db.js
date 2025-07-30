@@ -13,9 +13,20 @@ const pool = mysql.createPool({
     queueLimit: 0,           // Max number of requests in the queue (0 means no limit)
     // connectTimeout: The milliseconds before a timeout occurs during the initial connection.
     // A higher value gives more time for the TCP handshake across different networks.
-    // Default is often 10 seconds (10000 ms). Increase if connections are timing out
-    // but eventually succeed, indicating high latency.
-    connectTimeout: 20000 // Increased to 20 seconds for cross-provider connections
+    connectTimeout: 20000,   // Increased to 20 seconds for cross-provider connections
+
+    // New: acquireTimeout - The milliseconds before a timeout occurs when acquiring a connection from the pool.
+    // This is crucial if requests are waiting too long for an available connection.
+    acquireTimeout: 20000,   // 20 seconds to acquire a connection from the pool
+
+    // New: idleTimeout - The milliseconds a connection is allowed to be idle before being closed.
+    // This helps prevent stale connections if the database server closes idle connections.
+    // Set to 60 seconds (60000 ms), adjust based on Hostinger's idle timeout if known.
+    idleTimeout: 60000,
+    
+    // New: enableKeepAlive - Keep connections alive by sending a ping.
+    // This can help prevent the database from closing connections prematurely.
+    enableKeepAlive: true 
 });
 
 // Test the connection and log detailed errors
