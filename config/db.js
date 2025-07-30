@@ -9,7 +9,8 @@ const pool = mysql.createPool({
     database: process.env.DB_NAME,
     port: process.env.DB_PORT,
     waitForConnections: true, // Whether to queue requests when no connections are available
-    connectionLimit: 15,     // Increased connection limit slightly (from 10 to 15)
+    connectionLimit: 10,     // Adjusted connection limit (from 15 to 10)
+                             // This is a common limit for shared hosting.
                              // Be aware of Hostinger's actual concurrent connection limits.
     queueLimit: 0,           // Max number of requests in the queue (0 means no limit)
     // connectTimeout: The milliseconds before a timeout occurs during the initial connection.
