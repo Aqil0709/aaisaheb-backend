@@ -9,7 +9,7 @@ const pool = mysql.createPool({
     database: process.env.DB_NAME,
     port: process.env.DB_PORT,
     waitForConnections: true, // Whether to queue requests when no connections are available
-    connectionLimit: 10,     // Adjusted connection limit (from 15 to 10)
+    connectionLimit: 15,     // Adjusted connection limit (from 15 to 10)
                              // This is a common limit for shared hosting.
                              // Be aware of Hostinger's actual concurrent connection limits.
     queueLimit: 0,           // Max number of requests in the queue (0 means no limit)
@@ -28,8 +28,8 @@ const pool = mysql.createPool({
     // This can help prevent the database from closing connections prematurely.
     enableKeepAlive: true,
 
-    // trace: true // Uncomment this for very verbose logging of pool events (connection acquired, released, errors)
-                  // Only use for debugging, as it generates a lot of logs.
+    trace: true // IMPORTANT: Uncommented for very verbose logging of pool events.
+                  // This will generate a lot of logs, so use it only for debugging.
 });
 
 // Test the connection and log detailed errors
